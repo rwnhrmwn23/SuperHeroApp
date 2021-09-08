@@ -1,15 +1,10 @@
 package com.onedev.dicoding.superheroapp.ui.fragment.home
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.onedev.dicoding.superheroapp.core.data.Resource
-import com.onedev.dicoding.superheroapp.core.data.SuperHeroRepository
-import com.onedev.dicoding.superheroapp.core.data.source.local.entity.HeroEntity
+import com.onedev.dicoding.superheroapp.core.domain.usecase.HeroUseCase
 
-class HomeViewModel(private val superHeroRepository: SuperHeroRepository) : ViewModel() {
+class HomeViewModel(private val heroUseCase: HeroUseCase) : ViewModel() {
 
-    fun getSuperHeroByName(name: String): LiveData<Resource<List<HeroEntity>>> = superHeroRepository.getSuperHeroByName(name)
-
-    fun getFavoriteSuperHero(): LiveData<List<HeroEntity>> = superHeroRepository.getFavoriteSuperHero()
+    fun getSuperHeroByName(name: String) = heroUseCase.getSuperHeroByName(name)
 
 }

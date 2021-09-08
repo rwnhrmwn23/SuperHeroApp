@@ -9,24 +9,23 @@ import android.widget.TextView.OnEditorActionListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.onedev.dicoding.superheroapp.R
 import com.onedev.dicoding.superheroapp.core.data.Resource
-import com.onedev.dicoding.superheroapp.core.data.source.local.entity.HeroEntity
+import com.onedev.dicoding.superheroapp.core.domain.model.Hero
 import com.onedev.dicoding.superheroapp.core.utils.ExtHelper.gone
-import com.onedev.dicoding.superheroapp.core.utils.ExtHelper.showToast
 import com.onedev.dicoding.superheroapp.core.utils.ExtHelper.visible
 import com.onedev.dicoding.superheroapp.databinding.FragmentHomeBinding
+import com.onedev.dicoding.superheroapp.ui.ItemClicked
 import com.onedev.dicoding.superheroapp.ui.ViewModelFactory
 import com.onedev.dicoding.superheroapp.ui.fragment.favorite.FavoriteAdapter
+import com.onedev.dicoding.superheroapp.ui.fragment.favorite.FavoriteViewModel
 
+class HomeFragment : Fragment(), ItemClicked, View.OnClickListener {
 
-class HomeFragment : Fragment(), HomeAdapter.ItemClicked, FavoriteAdapter.ItemClicked {
-
-    private lateinit var adapter: HomeAdapter
-    private lateinit var favoriteAdapter: FavoriteAdapter
-    private lateinit var viewModel: HomeViewModel
+    private lateinit var homeAdapter: HomeAdapter
+    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var favoriteViewModel: FavoriteViewModel
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding
 
@@ -41,10 +40,11 @@ class HomeFragment : Fragment(), HomeAdapter.ItemClicked, FavoriteAdapter.ItemCl
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val factory = ViewModelFactory.getInstance(requireContext())
-        viewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
-        adapter = HomeAdapter(this)
-        favoriteAdapter = FavoriteAdapter(this)
+        homeViewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
+        favoriteViewModel = ViewModelProvider(this, factory)[FavoriteViewModel::class.java]
+        homeAdapter = HomeAdapter(this)
 
         if (savedInstanceState != null) {
             performSearch(savedInstanceState.getString(EXTRA_STATE).toString())
@@ -52,7 +52,7 @@ class HomeFragment : Fragment(), HomeAdapter.ItemClicked, FavoriteAdapter.ItemCl
 
         binding?.rvHero?.setHasFixedSize(true)
         binding?.rvHero?.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
-        binding?.rvHero?.adapter = adapter
+        binding?.rvHero?.adapter = homeAdapter
 
         binding?.edtSearchHero?.setOnEditorActionListener(OnEditorActionListener { query, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -62,28 +62,15 @@ class HomeFragment : Fragment(), HomeAdapter.ItemClicked, FavoriteAdapter.ItemCl
             false
         })
 
-        binding?.rvHeroFavorite?.setHasFixedSize(true)
-        binding?.rvHeroFavorite?.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding?.rvHeroFavorite?.adapter = favoriteAdapter
-
-        loadFavoriteHero()
-    }
-
-    private fun loadFavoriteHero() {
-        viewModel.getFavoriteSuperHero().observe(viewLifecycleOwner, { response ->
+        favoriteViewModel.getFavoriteSuperHero.observe(viewLifecycleOwner, { response ->
             if (response.isNotEmpty()) {
-                favoriteAdapter.setHeroes(response)
-                binding?.apply {
-                    rvHeroFavorite.visible()
-                    tvHeroFavorite.visible()
-                }
+                binding?.cartBadge?.text = response.size.toString()
             } else {
-                binding?.apply {
-                    rvHeroFavorite.gone()
-                    tvHeroFavorite.gone()
-                }
+                binding?.cartBadge?.text = getString(R.string.zero)
             }
         })
+
+        binding?.layoutFavorite?.setOnClickListener(this)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -95,7 +82,7 @@ class HomeFragment : Fragment(), HomeAdapter.ItemClicked, FavoriteAdapter.ItemCl
     }
 
     private fun performSearch(heroName: String) {
-        viewModel.getSuperHeroByName(heroName).observe(viewLifecycleOwner, { response ->
+        homeViewModel.getSuperHeroByName(heroName).observe(viewLifecycleOwner, { response ->
             if (response != null) {
                 when (response) {
                     is Resource.Loading -> {
@@ -105,7 +92,7 @@ class HomeFragment : Fragment(), HomeAdapter.ItemClicked, FavoriteAdapter.ItemCl
                     is Resource.Success -> {
                         if (response.data?.isNotEmpty() == true) {
                             showData(2)
-                            adapter.setHeroes(response.data)
+                            homeAdapter.setHeroes(response.data)
                         } else {
                             showData(3)
                             binding?.layoutError?.imgError?.setImageResource(R.drawable.ic_no_data)
@@ -115,7 +102,8 @@ class HomeFragment : Fragment(), HomeAdapter.ItemClicked, FavoriteAdapter.ItemCl
                     is Resource.Error -> {
                         showData(3)
                         binding?.layoutError?.imgError?.setImageResource(R.drawable.ic_error)
-                        binding?.layoutError?.tvError?.text = response.message ?: getString(R.string.something_wrong)
+                        binding?.layoutError?.tvError?.text =
+                            response.message ?: getString(R.string.something_wrong)
                     }
                 }
             }
@@ -144,15 +132,24 @@ class HomeFragment : Fragment(), HomeAdapter.ItemClicked, FavoriteAdapter.ItemCl
             }
         }
     }
+    override fun itemClicked(hero: Hero) {
+        val action = HomeFragmentDirections.actionNavHomeToDetailFragment(hero)
+        findNavController().navigate(action)
+    }
+
+    override fun onClick(v: View?) {
+        when (v) {
+            binding?.layoutFavorite -> {
+                val action = HomeFragmentDirections.actionNavHomeToNavFavorite()
+                findNavController().navigate(action)
+            }
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun itemClicked(hero: HeroEntity) {
-        val action = HomeFragmentDirections.actionNavHomeToDetailFragment(hero)
-        findNavController().navigate(action)
     }
 
     companion object {

@@ -1,12 +1,8 @@
 package com.onedev.dicoding.superheroapp.core.data.source.local.entity
 
-import android.os.Parcelable
-import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kotlinx.parcelize.Parcelize
 
-@Parcelize
 @Entity(tableName = "superHero")
 data class HeroEntity(
     @PrimaryKey
@@ -36,4 +32,4 @@ data class HeroEntity(
     val base: String,
     val occupation: String,
     var isFavorite: Boolean = false
-) : Parcelable
+)

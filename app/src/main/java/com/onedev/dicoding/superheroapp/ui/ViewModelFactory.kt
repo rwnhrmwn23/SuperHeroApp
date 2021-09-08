@@ -3,13 +3,13 @@ package com.onedev.dicoding.superheroapp.ui
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.onedev.dicoding.superheroapp.core.data.SuperHeroRepository
 import com.onedev.dicoding.superheroapp.core.di.Injection
+import com.onedev.dicoding.superheroapp.core.domain.usecase.HeroUseCase
 import com.onedev.dicoding.superheroapp.ui.fragment.detail.DetailViewModel
 import com.onedev.dicoding.superheroapp.ui.fragment.favorite.FavoriteViewModel
 import com.onedev.dicoding.superheroapp.ui.fragment.home.HomeViewModel
 
-class ViewModelFactory private constructor(private val superHeroRepository: SuperHeroRepository) :
+class ViewModelFactory private constructor(private val heroUseCase: HeroUseCase) :
     ViewModelProvider.NewInstanceFactory() {
 
     companion object {
@@ -18,7 +18,7 @@ class ViewModelFactory private constructor(private val superHeroRepository: Supe
 
         fun getInstance(context: Context): ViewModelFactory =
             instance ?: synchronized(this) {
-                instance ?: ViewModelFactory(Injection.provideRepository(context))
+                instance ?: ViewModelFactory(Injection.provideHeroUseCase(context))
             }
     }
 
@@ -26,15 +26,15 @@ class ViewModelFactory private constructor(private val superHeroRepository: Supe
     override fun <T : ViewModel> create(modelClass: Class<T>): T =
         when {
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
-                HomeViewModel(superHeroRepository) as T
+                HomeViewModel(heroUseCase) as T
             }
 
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
-                DetailViewModel(superHeroRepository) as T
+                DetailViewModel(heroUseCase) as T
             }
 
             modelClass.isAssignableFrom(FavoriteViewModel::class.java) -> {
-                FavoriteViewModel(superHeroRepository) as T
+                FavoriteViewModel(heroUseCase) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

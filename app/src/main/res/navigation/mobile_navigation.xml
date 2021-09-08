@@ -14,7 +14,7 @@
             android:id="@+id/action_nav_home_to_detailFragment"
             app:destination="@id/nav_detail" />
         <action
-            android:id="@+id/action_nav_home_to_favoriteFragment"
+            android:id="@+id/action_nav_home_to_nav_favorite"
             app:destination="@id/nav_favorite" />
     </fragment>
     <fragment
@@ -24,12 +24,16 @@
         tools:layout="@layout/fragment_detail" >
         <argument
             android:name="heroEntity"
-            app:argType="com.onedev.dicoding.superheroapp.core.data.source.local.entity.HeroEntity" />
+            app:argType="com.onedev.dicoding.superheroapp.core.domain.model.Hero" />
     </fragment>
     <fragment
         android:id="@+id/nav_favorite"
         android:name="com.onedev.dicoding.superheroapp.ui.fragment.favorite.FavoriteFragment"
         android:label="@string/menu_favorite"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_nav_favorite_to_nav_detail"
+            app:destination="@id/nav_detail" />
+    </fragment>
 
 </navigation>

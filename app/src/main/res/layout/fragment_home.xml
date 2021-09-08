@@ -20,7 +20,8 @@
             android:layout_marginTop="-40dp"
             android:adjustViewBounds="true"
             android:alpha="0.30"
-            android:background="@drawable/hero" />
+            android:background="@drawable/hero"
+            android:contentDescription="@string/hero_image" />
 
         <View
             android:layout_width="match_parent"
@@ -127,25 +128,45 @@
                 android:id="@+id/layout_error"
                 layout="@layout/layout_error" />
 
-            <TextView
-                android:id="@+id/tv_hero_favorite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="@string/your_favorite_hero"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_hero_favorite"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:visibility="gone"
-                tools:listitem="@layout/layout_list_hero" />
-
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <FrameLayout
+        android:layout_gravity="bottom|end"
+        android:id="@+id/layout_favorite"
+        style="?attr/actionButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        android:clipToPadding="false"
+        android:focusable="true">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_baseline_favorite"
+            android:contentDescription="@string/your_favorite_hero"
+            app:tint="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/cart_badge"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="end|top"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="-8dp"
+            android:background="@drawable/badge_background"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="@string/zero"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            tools:ignore="SmallSp" />
+
+    </FrameLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

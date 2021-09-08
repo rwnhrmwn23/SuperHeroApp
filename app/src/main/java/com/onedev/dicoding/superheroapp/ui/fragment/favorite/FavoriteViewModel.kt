@@ -1,14 +1,10 @@
 package com.onedev.dicoding.superheroapp.ui.fragment.favorite
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.onedev.dicoding.superheroapp.core.data.SuperHeroRepository
+import com.onedev.dicoding.superheroapp.core.domain.usecase.HeroUseCase
 
-class FavoriteViewModel(superHeroRepository: SuperHeroRepository) : ViewModel() {
+class FavoriteViewModel(heroUseCase: HeroUseCase) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is slideshow Fragment"
-    }
-    val text: LiveData<String> = _text
+    val getFavoriteSuperHero = heroUseCase.getFavoriteSuperHero()
+
 }

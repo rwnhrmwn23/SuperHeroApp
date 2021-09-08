@@ -41,47 +41,15 @@ object DataMapper {
         return heroList
     }
 
-    fun mapEntitiesToDomain(input: List<HeroEntity>): List<Hero> =
-        input.map {
-            Hero(
-                id = it.id,
-                name = it.name,
-                eyeColor = it.eyeColor,
-                gender = it.gender,
-                hairColor = it.hairColor,
-                race = it.race,
-                height = it.height[1].toString(),
-                weight = it.weight[1].toString(),
-                alignment = it.alignment,
-                alterEgos = it.alterEgos,
-                firstAppearance = it.firstAppearance,
-                fullName = it.fullName,
-                placeOfBirth = it.placeOfBirth,
-                publisher = it.publisher,
-                groupAffiliation = it.groupAffiliation,
-                relatives = it.relatives,
-                url = it.url,
-                combat = it.combat,
-                durability = it.durability,
-                intelligence = it.intelligence,
-                power = it.power,
-                speed = it.speed,
-                strength = it.strength,
-                base = it.base,
-                occupation = it.occupation,
-                isFavorite = false
-            )
-        }
-
-    fun mapDomainToEntity(it: Hero) = HeroEntity(
+    fun mapEntityToDomain(it: HeroEntity) = Hero(
         id = it.id,
         name = it.name,
         eyeColor = it.eyeColor,
         gender = it.gender,
         hairColor = it.hairColor,
         race = it.race,
-        height = it.height[1].toString(),
-        weight = it.weight[1].toString(),
+        height = it.height,
+        weight = it.weight,
         alignment = it.alignment,
         alterEgos = it.alterEgos,
         firstAppearance = it.firstAppearance,
@@ -99,6 +67,67 @@ object DataMapper {
         strength = it.strength,
         base = it.base,
         occupation = it.occupation,
-        isFavorite = false
+        isFavorite = it.isFavorite
+    )
+
+    fun mapEntitiesToDomain(input: List<HeroEntity>): List<Hero> =
+        input.map {
+            Hero(
+                id = it.id,
+                name = it.name,
+                eyeColor = it.eyeColor,
+                gender = it.gender,
+                hairColor = it.hairColor,
+                race = it.race,
+                height = it.height,
+                weight = it.weight,
+                alignment = it.alignment,
+                alterEgos = it.alterEgos,
+                firstAppearance = it.firstAppearance,
+                fullName = it.fullName,
+                placeOfBirth = it.placeOfBirth,
+                publisher = it.publisher,
+                groupAffiliation = it.groupAffiliation,
+                relatives = it.relatives,
+                url = it.url,
+                combat = it.combat,
+                durability = it.durability,
+                intelligence = it.intelligence,
+                power = it.power,
+                speed = it.speed,
+                strength = it.strength,
+                base = it.base,
+                occupation = it.occupation,
+                isFavorite = it.isFavorite
+            )
+        }
+
+    fun mapDomainToEntity(it: Hero) = HeroEntity(
+        id = it.id,
+        name = it.name,
+        eyeColor = it.eyeColor,
+        gender = it.gender,
+        hairColor = it.hairColor,
+        race = it.race,
+        height = it.height,
+        weight = it.weight,
+        alignment = it.alignment,
+        alterEgos = it.alterEgos,
+        firstAppearance = it.firstAppearance,
+        fullName = it.fullName,
+        placeOfBirth = it.placeOfBirth,
+        publisher = it.publisher,
+        groupAffiliation = it.groupAffiliation,
+        relatives = it.relatives,
+        url = it.url,
+        combat = it.combat,
+        durability = it.durability,
+        intelligence = it.intelligence,
+        power = it.power,
+        speed = it.speed,
+        strength = it.strength,
+        base = it.base,
+        occupation = it.occupation,
+        isFavorite = it.isFavorite
     )
 }
