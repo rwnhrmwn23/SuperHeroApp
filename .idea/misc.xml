@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.37864583333333335" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/drawable/background_search_bar.xml" value="0.37864583333333335" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/drawable/background_text.xml" value="0.37864583333333335" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/drawable/ic_baseline_favorite.xml" value="0.37864583333333335" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/drawable/ic_baseline_favorite_border.xml" value="0.37864583333333335" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/drawable/ic_baseline_home.xml" value="0.37864583333333335" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/drawable/ic_baseline_search.xml" value="0.37864583333333335" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/drawable/ic_error.xml" value="0.37864583333333335" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/drawable/ic_launcher_background.xml" value="0.37864583333333335" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/drawable/ic_loading.xml" value="0.37864583333333335" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/drawable/image_front_shadow.xml" value="0.37864583333333335" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/drawable/rounded_bottom_border_red.xml" value="0.37864583333333335" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/drawable/rounded_bottom_border_white.xml" value="0.37864583333333335" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/drawable/rounded_top_border.xml" value="0.37864583333333335" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/drawable/side_nav_bar.xml" value="0.37864583333333335" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/layout/activity_detail.xml" value="0.3625" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/layout/activity_main.xml" value="0.3625" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/layout/app_bar_main.xml" value="0.3625" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/layout/content_main.xml" value="0.3625" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/layout/fragment_additional.xml" value="0.3625" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/layout/fragment_appearance.xml" value="0.3625" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/layout/fragment_biography.xml" value="0.3625" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/layout/fragment_detail.xml" value="0.3625" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/layout/fragment_detail_dummy.xml" value="0.3625" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/layout/fragment_gallery.xml" value="0.3625" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/layout/fragment_home.xml" value="0.19783968163729393" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/layout/fragment_power_stat.xml" value="0.3625" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/layout/fragment_slideshow.xml" value="0.3625" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/layout/layout_error.xml" value="0.3625" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/layout/layout_hero_additional.xml" value="0.3625" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/layout/layout_hero_appearance.xml" value="0.3625" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/layout/layout_hero_biography.xml" value="0.3625" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/layout/layout_hero_detail.xml" value="0.3625" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/layout/layout_hero_stat.xml" value="0.3625" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/layout/layout_list_hero.xml" value="0.3569230769230769" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/layout/nav_header_main.xml" value="0.3625" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/menu/activity_main_drawer.xml" value="0.3625" />
+        <entry key="..\:/IRWAN/Dicoding/MADE/Submission/app/src/main/res/menu/main.xml" value="0.3625" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
