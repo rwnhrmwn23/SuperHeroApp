@@ -12,7 +12,7 @@ import com.onedev.dicoding.superheroapp.core.utils.ExtHelper.loadImage
 import com.onedev.dicoding.superheroapp.databinding.FragmentDetailBinding
 import com.onedev.dicoding.superheroapp.ui.ViewModelFactory
 
-class DetailFragment : Fragment(), View.OnClickListener {
+class DetailFragment : Fragment() {
 
     private lateinit var viewModel: DetailViewModel
     private var _binding: FragmentDetailBinding? = null
@@ -34,25 +34,30 @@ class DetailFragment : Fragment(), View.OnClickListener {
         val factory = ViewModelFactory.getInstance(requireContext())
         viewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
 
-        binding?.fabFavorite?.setOnClickListener(this)
-
         populateView()
     }
 
     private fun populateView() {
+        var statusFavorite = false
         with(args.heroEntity) {
             binding?.apply {
-                fabState(args.heroEntity.isFavorite)
-                imgHero.loadImage(url)
-                tvHeroName.text = name
-
-                val adapter = ViewPagerDetailHeroAdapter(
-                    requireFragmentManager(),
-                    requireContext(),
-                    args.heroEntity.id
-                )
+                val adapter = ViewPagerDetailHeroAdapter(requireFragmentManager(), requireContext(), id)
                 viewPager.adapter = adapter
                 tabs.setupWithViewPager(binding?.viewPager)
+
+                viewModel.getSuperheroById(id).observe(viewLifecycleOwner, { hero ->
+                    statusFavorite = hero.isFavorite
+                    fabState(statusFavorite)
+
+                    imgHero.loadImage(hero.url)
+                    tvHeroName.text = hero.name
+                })
+
+                fabFavorite.setOnClickListener {
+                    statusFavorite = !statusFavorite
+                    fabState(statusFavorite)
+                    viewModel.updateFavoriteSuperHero(args.heroEntity, statusFavorite)
+                }
             }
         }
     }
@@ -62,16 +67,5 @@ class DetailFragment : Fragment(), View.OnClickListener {
             binding?.fabFavorite?.setImageResource(R.drawable.ic_baseline_favorite)
         else
             binding?.fabFavorite?.setImageResource(R.drawable.ic_baseline_favorite_border)
-    }
-
-    override fun onClick(v: View?) {
-        when (v) {
-            binding?.fabFavorite -> {
-                with(!args.heroEntity.isFavorite) {
-                    fabState(this)
-                    viewModel.updateFavoriteSuperHero(args.heroEntity, this)
-                }
-            }
-        }
     }
 }
