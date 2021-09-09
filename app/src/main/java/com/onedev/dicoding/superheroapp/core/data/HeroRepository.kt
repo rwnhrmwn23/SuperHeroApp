@@ -1,7 +1,5 @@
 package com.onedev.dicoding.superheroapp.core.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import com.onedev.dicoding.superheroapp.core.data.source.local.LocalDataSource
 import com.onedev.dicoding.superheroapp.core.data.source.remote.RemoteDataSource
 import com.onedev.dicoding.superheroapp.core.data.source.remote.network.ApiResponse
@@ -10,6 +8,8 @@ import com.onedev.dicoding.superheroapp.core.domain.model.Hero
 import com.onedev.dicoding.superheroapp.core.domain.repository.IHeroRepository
 import com.onedev.dicoding.superheroapp.core.utils.AppExecutors
 import com.onedev.dicoding.superheroapp.core.utils.DataMapper
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class HeroRepository private constructor(
     private val remoteDataSource: RemoteDataSource,
@@ -31,39 +31,34 @@ class HeroRepository private constructor(
             }
     }
 
-    override fun getSuperHeroByName(name: String): LiveData<Resource<List<Hero>>> =
+    override fun getSuperHeroByName(name: String): Flow<Resource<List<Hero>>> =
         object : NetworkBoundResource<List<Hero>, List<HeroResults>>(appExecutors) {
-            override fun loadFromDB(): LiveData<List<Hero>> {
-                return Transformations.map(localDataSource.getSuperHeroByName(name)) {
-                    DataMapper.mapEntitiesToDomain(it)
-                }
+            override fun loadFromDB(): Flow<List<Hero>> {
+                return localDataSource.getSuperHeroByName(name)
+                    .map { DataMapper.mapEntitiesToDomain(it) }
             }
 
             override fun shouldFetch(data: List<Hero>?): Boolean {
                 return data == null || data.isEmpty()
             }
 
-            override fun createCall(): LiveData<ApiResponse<List<HeroResults>>> {
+            override suspend fun createCall(): Flow<ApiResponse<List<HeroResults>>> {
                 return remoteDataSource.searchHeroByName(name)
             }
 
-            override fun saveCallResult(data: List<HeroResults>) {
+            override suspend fun saveCallResult(data: List<HeroResults>) {
                 val superHeroList = DataMapper.mapResponsesToEntities(data)
                 localDataSource.insertSuperHero(superHeroList)
             }
-        }.asLiveData()
+        }.asFlow()
 
 
-    override fun getSuperheroById(id: String): LiveData<Hero> {
-        return Transformations.map(localDataSource.getSuperheroById(id)) {
-            DataMapper.mapEntityToDomain(it)
-        }
+    override fun getSuperheroById(id: String): Flow<Hero> {
+        return localDataSource.getSuperheroById(id).map { DataMapper.mapEntityToDomain(it) }
     }
 
-    override fun getFavoriteSuperHero(): LiveData<List<Hero>> {
-        return Transformations.map(localDataSource.getFavoriteSuperHero()) {
-            DataMapper.mapEntitiesToDomain(it)
-        }
+    override fun getFavoriteSuperHero(): Flow<List<Hero>> {
+        return localDataSource.getFavoriteSuperHero().map { DataMapper.mapEntitiesToDomain(it) }
     }
 
     override fun updateFavoriteSuperHero(hero: Hero, state: Boolean) {

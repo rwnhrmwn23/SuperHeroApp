@@ -3,21 +3,22 @@ package com.onedev.dicoding.superheroapp.core.data.source.local.room
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.onedev.dicoding.superheroapp.core.data.source.local.entity.HeroEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface SuperHeroDao {
 
     @Query("SELECT * FROM superHero WHERE id = :id")
-    fun getSuperheroById(id: String): LiveData<HeroEntity>
+    fun getSuperheroById(id: String): Flow<HeroEntity>
 
     @Query("SELECT * FROM superHero WHERE name LIKE '%' || :name || '%'")
-    fun getSuperHeroByName(name: String): LiveData<List<HeroEntity>>
+    fun getSuperHeroByName(name: String): Flow<List<HeroEntity>>
 
     @Query("SELECT * FROM superHero WHERE isFavorite = 1")
-    fun getFavoriteSuperHero(): LiveData<List<HeroEntity>>
+    fun getFavoriteSuperHero(): Flow<List<HeroEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertSuperHero(heroEntities: List<HeroEntity>)
+    suspend fun insertSuperHero(heroEntities: List<HeroEntity>)
 
     @Update
     fun updateFavoriteSuperHero(heroEntity: HeroEntity)

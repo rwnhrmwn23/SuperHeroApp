@@ -6,5 +6,5 @@ data class HeroResponse(
     val response: String,
     @SerializedName("results-for")
     val resultsFor: String,
-    val results: List<HeroResults>?,
+    val results: List<HeroResults>,
 )
