@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.onedev.dicoding.superheroapp.R
@@ -14,14 +13,15 @@ import com.onedev.dicoding.superheroapp.core.utils.ExtHelper.gone
 import com.onedev.dicoding.superheroapp.core.utils.ExtHelper.visible
 import com.onedev.dicoding.superheroapp.databinding.FragmentFavoriteBinding
 import com.onedev.dicoding.superheroapp.ui.ItemClicked
-import com.onedev.dicoding.superheroapp.ui.ViewModelFactory
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class FavoriteFragment : Fragment(), ItemClicked {
 
     private lateinit var favoriteAdapter: FavoriteAdapter
-    private lateinit var viewModel: FavoriteViewModel
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding
+
+    private val favoriteViewModel: FavoriteViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,8 +34,6 @@ class FavoriteFragment : Fragment(), ItemClicked {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val factory = ViewModelFactory.getInstance(requireContext())
-        viewModel = ViewModelProvider(this, factory)[FavoriteViewModel::class.java]
         favoriteAdapter = FavoriteAdapter(this)
 
         binding?.toolbar?.setNavigationOnClickListener { activity?.onBackPressed() }
@@ -43,7 +41,7 @@ class FavoriteFragment : Fragment(), ItemClicked {
         binding?.rvHeroFavorite?.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
         binding?.rvHeroFavorite?.adapter = favoriteAdapter
 
-        viewModel.getFavoriteSuperHero.observe(viewLifecycleOwner, { response ->
+        favoriteViewModel.getFavoriteSuperHero.observe(viewLifecycleOwner, { response ->
             if (response.isNotEmpty()) {
                 showData(true)
                 favoriteAdapter.setHeroes(response)

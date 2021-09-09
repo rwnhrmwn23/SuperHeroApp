@@ -11,25 +11,11 @@ import com.onedev.dicoding.superheroapp.core.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class HeroRepository private constructor(
+class HeroRepository(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
 ) : IHeroRepository {
-
-    companion object {
-        @Volatile
-        private var instance: HeroRepository? = null
-
-        fun getInstance(
-            remoteData: RemoteDataSource,
-            localData: LocalDataSource,
-            appExecutors: AppExecutors
-        ): HeroRepository =
-            instance ?: synchronized(this) {
-                instance ?: HeroRepository(remoteData, localData, appExecutors)
-            }
-    }
 
     override fun getSuperHeroByName(name: String): Flow<Resource<List<Hero>>> =
         object : NetworkBoundResource<List<Hero>, List<HeroResults>>(appExecutors) {

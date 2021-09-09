@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView.OnEditorActionListener
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.onedev.dicoding.superheroapp.R
@@ -17,17 +16,17 @@ import com.onedev.dicoding.superheroapp.core.utils.ExtHelper.gone
 import com.onedev.dicoding.superheroapp.core.utils.ExtHelper.visible
 import com.onedev.dicoding.superheroapp.databinding.FragmentHomeBinding
 import com.onedev.dicoding.superheroapp.ui.ItemClicked
-import com.onedev.dicoding.superheroapp.ui.ViewModelFactory
-import com.onedev.dicoding.superheroapp.ui.fragment.favorite.FavoriteAdapter
 import com.onedev.dicoding.superheroapp.ui.fragment.favorite.FavoriteViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment(), ItemClicked, View.OnClickListener {
 
     private lateinit var homeAdapter: HomeAdapter
-    private lateinit var homeViewModel: HomeViewModel
-    private lateinit var favoriteViewModel: FavoriteViewModel
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding
+
+    private val homeViewModel: HomeViewModel by viewModel()
+    private val favoriteViewModel: FavoriteViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,18 +40,21 @@ class HomeFragment : Fragment(), ItemClicked, View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val factory = ViewModelFactory.getInstance(requireContext())
-        homeViewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
-        favoriteViewModel = ViewModelProvider(this, factory)[FavoriteViewModel::class.java]
-        homeAdapter = HomeAdapter(this)
-
         if (savedInstanceState != null) {
             performSearch(savedInstanceState.getString(EXTRA_STATE).toString())
         }
 
+        homeAdapter = HomeAdapter(this)
         binding?.rvHero?.setHasFixedSize(true)
         binding?.rvHero?.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         binding?.rvHero?.adapter = homeAdapter
+
+        favoriteViewModel.getFavoriteSuperHero.observe(viewLifecycleOwner, { response ->
+            if (response.isNotEmpty())
+                binding?.cartBadge?.text = response.size.toString()
+            else
+                binding?.cartBadge?.text = getString(R.string.zero)
+        })
 
         binding?.edtSearchHero?.setOnEditorActionListener(OnEditorActionListener { query, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -60,14 +62,6 @@ class HomeFragment : Fragment(), ItemClicked, View.OnClickListener {
                 return@OnEditorActionListener true
             }
             false
-        })
-
-        favoriteViewModel.getFavoriteSuperHero.observe(viewLifecycleOwner, { response ->
-            if (response.isNotEmpty()) {
-                binding?.cartBadge?.text = response.size.toString()
-            } else {
-                binding?.cartBadge?.text = getString(R.string.zero)
-            }
         })
 
         binding?.layoutFavorite?.setOnClickListener(this)
@@ -102,8 +96,7 @@ class HomeFragment : Fragment(), ItemClicked, View.OnClickListener {
                     is Resource.Error -> {
                         showData(3)
                         binding?.layoutError?.imgError?.setImageResource(R.drawable.ic_error)
-                        binding?.layoutError?.tvError?.text =
-                            response.message ?: getString(R.string.something_wrong)
+                        binding?.layoutError?.tvError?.text = response.message ?: getString(R.string.something_wrong)
                     }
                 }
             }
@@ -132,6 +125,7 @@ class HomeFragment : Fragment(), ItemClicked, View.OnClickListener {
             }
         }
     }
+
     override fun itemClicked(hero: Hero) {
         val action = HomeFragmentDirections.actionNavHomeToDetailFragment(hero)
         findNavController().navigate(action)

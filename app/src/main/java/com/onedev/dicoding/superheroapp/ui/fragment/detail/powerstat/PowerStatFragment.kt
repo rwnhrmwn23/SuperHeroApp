@@ -5,16 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.onedev.dicoding.superheroapp.core.utils.ExtHelper.convertNullValue
 import com.onedev.dicoding.superheroapp.core.utils.ExtHelper.convertToInt
 import com.onedev.dicoding.superheroapp.databinding.FragmentPowerStatBinding
-import com.onedev.dicoding.superheroapp.ui.ViewModelFactory
 import com.onedev.dicoding.superheroapp.ui.fragment.detail.DetailViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class PowerStatFragment : Fragment() {
 
-    private lateinit var viewModel: DetailViewModel
+    private val viewModel: DetailViewModel by viewModel()
     private var _binding: FragmentPowerStatBinding? = null
     private val binding get() = _binding
 
@@ -39,8 +38,6 @@ class PowerStatFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val id = checkNotNull(arguments?.getString("id"))
-        val factory = ViewModelFactory.getInstance(requireContext())
-        viewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
 
         viewModel.getSuperheroById(id).observe(viewLifecycleOwner, {
             with(it) {
