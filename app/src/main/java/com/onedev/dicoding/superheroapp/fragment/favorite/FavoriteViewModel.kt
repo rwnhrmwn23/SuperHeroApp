@@ -1,4 +1,4 @@
-package com.onedev.dicoding.superheroapp.ui.fragment.favorite
+package com.onedev.dicoding.superheroapp.fragment.favorite
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

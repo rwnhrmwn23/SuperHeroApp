@@ -1,4 +1,4 @@
-package com.onedev.dicoding.superheroapp.ui.fragment.detail
+package com.onedev.dicoding.superheroapp.fragment.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater

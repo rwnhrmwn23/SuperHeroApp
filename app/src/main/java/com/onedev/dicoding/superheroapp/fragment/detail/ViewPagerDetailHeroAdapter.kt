@@ -1,14 +1,14 @@
-package com.onedev.dicoding.superheroapp.ui.fragment.detail
+package com.onedev.dicoding.superheroapp.fragment.detail
 
 import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.onedev.dicoding.superheroapp.R
-import com.onedev.dicoding.superheroapp.ui.fragment.detail.additional.AdditionalFragment
-import com.onedev.dicoding.superheroapp.ui.fragment.detail.appearence.AppearenceFragment
-import com.onedev.dicoding.superheroapp.ui.fragment.detail.biography.BiographyFragment
-import com.onedev.dicoding.superheroapp.ui.fragment.detail.powerstat.PowerStatFragment
+import com.onedev.dicoding.superheroapp.fragment.detail.additional.AdditionalFragment
+import com.onedev.dicoding.superheroapp.fragment.detail.appearence.AppearenceFragment
+import com.onedev.dicoding.superheroapp.fragment.detail.biography.BiographyFragment
+import com.onedev.dicoding.superheroapp.fragment.detail.powerstat.PowerStatFragment
 
 class ViewPagerDetailHeroAdapter(
     supportFragmentManager: FragmentManager,

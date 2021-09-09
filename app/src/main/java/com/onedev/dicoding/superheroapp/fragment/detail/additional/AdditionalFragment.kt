@@ -1,4 +1,4 @@
-package com.onedev.dicoding.superheroapp.ui.fragment.detail.appearence
+package com.onedev.dicoding.superheroapp.fragment.detail.additional
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,18 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.onedev.dicoding.superheroapp.core.utils.ExtHelper.convertNullValue
-import com.onedev.dicoding.superheroapp.databinding.FragmentAppearanceBinding
-import com.onedev.dicoding.superheroapp.ui.fragment.detail.DetailViewModel
+import com.onedev.dicoding.superheroapp.databinding.FragmentAdditionalBinding
+import com.onedev.dicoding.superheroapp.fragment.detail.DetailViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class AppearenceFragment : Fragment() {
+class AdditionalFragment : Fragment() {
 
     private val viewModel: DetailViewModel by viewModel()
-    private var _binding: FragmentAppearanceBinding? = null
+    private var _binding: FragmentAdditionalBinding? = null
     private val binding get() = _binding
 
     companion object {
-        fun newInstance(id: String?) = AppearenceFragment().apply {
+        fun newInstance(id: String?) = AdditionalFragment().apply {
             arguments = Bundle().apply {
                 putString("id", id)
             }
@@ -29,24 +29,21 @@ class AppearenceFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentAppearanceBinding.inflate(inflater, container, false)
+        _binding = FragmentAdditionalBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val id = checkNotNull(arguments?.getString("id"))
 
         viewModel.getSuperheroById(id).observe(viewLifecycleOwner, {
             with(it) {
                 binding?.apply {
-                    tvGender.text = gender.convertNullValue()
-                    tvRace.text = race.convertNullValue()
-                    tvHeight.text = height.convertNullValue()
-                    tvWeight.text = weight.convertNullValue()
-                    tvEyeColor.text = eyeColor.convertNullValue()
-                    tvHairColor.text = hairColor.convertNullValue()
+                    tvOccupation.text = occupation.convertNullValue()
+                    tvBase.text = base.convertNullValue()
+                    tvGroupAffiliation.text = groupAffiliation.convertNullValue()
+                    tvRelatives.text = relatives.convertNullValue()
                 }
             }
         })

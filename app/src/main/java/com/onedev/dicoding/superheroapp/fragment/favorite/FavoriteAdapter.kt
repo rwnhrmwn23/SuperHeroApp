@@ -1,4 +1,4 @@
-package com.onedev.dicoding.superheroapp.ui.fragment.home
+package com.onedev.dicoding.superheroapp.fragment.favorite
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -7,9 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.onedev.dicoding.superheroapp.core.domain.model.Hero
 import com.onedev.dicoding.superheroapp.core.utils.ExtHelper.loadImage
 import com.onedev.dicoding.superheroapp.databinding.LayoutListHeroBinding
-import com.onedev.dicoding.superheroapp.ui.ItemClicked
+import com.onedev.dicoding.superheroapp.fragment.ItemClicked
 
-class HomeAdapter(private val callback: ItemClicked) : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
+class FavoriteAdapter(private val callback: ItemClicked) :
+    RecyclerView.Adapter<FavoriteAdapter.HomeViewHolder>() {
 
     private val heroes = ArrayList<Hero>()
 
@@ -33,13 +34,13 @@ class HomeAdapter(private val callback: ItemClicked) : RecyclerView.Adapter<Home
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAdapter.HomeViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val binding =
             LayoutListHeroBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return HomeViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: HomeAdapter.HomeViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         holder.bind(heroes[position])
     }
 

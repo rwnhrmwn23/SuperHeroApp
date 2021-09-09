@@ -1,4 +1,4 @@
-package com.onedev.dicoding.superheroapp.ui.fragment.favorite
+package com.onedev.dicoding.superheroapp.fragment.favorite
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import com.onedev.dicoding.superheroapp.core.domain.model.Hero
 import com.onedev.dicoding.superheroapp.core.utils.ExtHelper.gone
 import com.onedev.dicoding.superheroapp.core.utils.ExtHelper.visible
 import com.onedev.dicoding.superheroapp.databinding.FragmentFavoriteBinding
-import com.onedev.dicoding.superheroapp.ui.ItemClicked
+import com.onedev.dicoding.superheroapp.fragment.ItemClicked
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class FavoriteFragment : Fragment(), ItemClicked {

@@ -1,4 +1,4 @@
-package com.onedev.dicoding.superheroapp.ui
+package com.onedev.dicoding.superheroapp.fragment
 
 import com.onedev.dicoding.superheroapp.core.domain.model.Hero
 

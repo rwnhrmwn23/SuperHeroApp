@@ -1,4 +1,4 @@
-package com.onedev.dicoding.superheroapp.ui.fragment.home
+package com.onedev.dicoding.superheroapp.fragment.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

@@ -1,4 +1,4 @@
-package com.onedev.dicoding.superheroapp.ui.fragment.detail.powerstat
+package com.onedev.dicoding.superheroapp.fragment.detail.powerstat
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.onedev.dicoding.superheroapp.core.utils.ExtHelper.convertNullValue
 import com.onedev.dicoding.superheroapp.core.utils.ExtHelper.convertToInt
 import com.onedev.dicoding.superheroapp.databinding.FragmentPowerStatBinding
-import com.onedev.dicoding.superheroapp.ui.fragment.detail.DetailViewModel
+import com.onedev.dicoding.superheroapp.fragment.detail.DetailViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PowerStatFragment : Fragment() {

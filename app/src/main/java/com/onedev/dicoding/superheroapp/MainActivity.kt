@@ -1,4 +1,4 @@
-package com.onedev.dicoding.superheroapp.ui.activity
+package com.onedev.dicoding.superheroapp
 
 import android.os.Bundle
 import android.view.Menu
