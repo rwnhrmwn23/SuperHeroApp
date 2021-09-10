@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.onedev.dicoding.superheroapp.fragment.home.HomeFragment"
+        android:name="com.onedev.dicoding.superheroapp.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_detail"
-        android:name="com.onedev.dicoding.superheroapp.fragment.detail.DetailFragment"
+        android:name="com.onedev.dicoding.superheroapp.detail.DetailFragment"
         android:label="@string/menu_detail"
         tools:layout="@layout/fragment_detail" >
         <argument
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_favorite"
-        android:name="com.onedev.dicoding.superheroapp.fragment.favorite.FavoriteFragment"
+        android:name="com.onedev.dicoding.superheroapp.favorite.FavoriteFragment"
         android:label="@string/menu_favorite"
         tools:layout="@layout/fragment_favorite" >
         <action
