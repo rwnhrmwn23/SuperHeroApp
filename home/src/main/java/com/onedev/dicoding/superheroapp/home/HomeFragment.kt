@@ -86,10 +86,9 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 when (response) {
                     is Resource.Loading -> {
                         showData(1)
-                        binding?.progressBar?.visibility = View.VISIBLE
                     }
                     is Resource.Success -> {
-                        if (response.data?.isNotEmpty() == true) {
+                        if (response.data != null) {
                             showData(2)
                             heroAdapter.setHeroes(response.data)
                         } else {
@@ -101,8 +100,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
                     is Resource.Error -> {
                         showData(3)
                         binding?.layoutError?.imgError?.setImageResource(R.drawable.ic_error)
-                        binding?.layoutError?.tvError?.text =
-                            response.message ?: getString(R.string.something_wrong)
+                        binding?.layoutError?.tvError?.text = getString(R.string.something_wrong)
                     }
                 }
             }

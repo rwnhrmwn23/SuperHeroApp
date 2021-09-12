@@ -8,10 +8,6 @@ import com.bumptech.glide.Glide
 import com.onedev.dicoding.superheroapp.core.R
 
 object ExtHelper {
-    fun Context.showToast(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-    }
-
     fun ImageView.loadImage(url: String) {
         Glide.with(context)
             .load(url)
