@@ -1,47 +1,27 @@
 package com.onedev.dicoding.superheroapp.detail
 
-import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.onedev.dicoding.superheroapp.detail.additional.AdditionalFragment
 import com.onedev.dicoding.superheroapp.detail.appearence.AppearenceFragment
 import com.onedev.dicoding.superheroapp.detail.biography.BiographyFragment
 import com.onedev.dicoding.superheroapp.detail.powerstat.PowerStatFragment
 
-class ViewPagerDetailHeroAdapter(
-    supportFragmentManager: FragmentManager,
-    context: Context,
-    private val heroId: String
-) : FragmentStatePagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class ViewPagerDetailHeroAdapter(activity: AppCompatActivity, private val heroId: String) :
+    FragmentStateAdapter(activity) {
 
-    data class Page(val title: String, val ctor: () -> Fragment)
+    data class Page(val fragment: () -> Fragment)
 
     @Suppress("MoveLambdaOutsideParentheses")
     private val pages = listOf(
-        Page(context.getString(R.string.biography),
-            { BiographyFragment.newInstance(heroId) }
-        ),
-        Page(context.getString(R.string.appearance),
-            { AppearenceFragment.newInstance(heroId) }
-        ),
-        Page(context.getString(R.string.powerstat),
-            { PowerStatFragment.newInstance(heroId) }
-        ),
-        Page(context.getString(R.string.additional),
-            { AdditionalFragment.newInstance(heroId) }
-        )
+        Page({ BiographyFragment.newInstance(heroId) }),
+        Page({ AppearenceFragment.newInstance(heroId) }),
+        Page({ PowerStatFragment.newInstance(heroId) }),
+        Page({ AdditionalFragment.newInstance(heroId) })
     )
 
-    override fun getItem(position: Int): Fragment {
-        return pages[position].ctor()
-    }
+    override fun getItemCount(): Int = pages.size
 
-    override fun getCount(): Int {
-        return pages.size
-    }
-
-    override fun getPageTitle(position: Int): CharSequence {
-        return pages[position].title
-    }
+    override fun createFragment(position: Int) = pages[position].fragment()
 }

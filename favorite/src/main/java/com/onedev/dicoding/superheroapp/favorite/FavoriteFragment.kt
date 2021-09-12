@@ -75,6 +75,7 @@ class FavoriteFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        binding?.rvHeroFavorite?.adapter = null
         super.onDestroyView()
         _binding = null
     }

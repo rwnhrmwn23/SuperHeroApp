@@ -46,7 +46,8 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
         heroAdapter = HeroAdapter()
         binding?.rvHero?.setHasFixedSize(true)
-        binding?.rvHero?.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+        binding?.rvHero?.layoutManager =
+            StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         binding?.rvHero?.adapter = heroAdapter
 
         heroAdapter.onItemClick = { hero ->
@@ -141,6 +142,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
 
     override fun onDestroyView() {
+        binding?.rvHero?.adapter = null
         super.onDestroyView()
         _binding = null
     }

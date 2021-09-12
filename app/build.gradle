@@ -40,4 +40,7 @@ android {
 
 dependencies {
     implementation project(":core")
+
+    // Leakcanary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
 }
