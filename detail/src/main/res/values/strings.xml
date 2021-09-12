@@ -23,10 +23,8 @@
     <string name="weight">Weight</string>
     <string name="eye_color">Eye Color</string>
     <string name="hair_color">Hair Color</string>
-    <string name="work">Work</string>
     <string name="occupation">Occupation</string>
     <string name="base">Base</string>
-    <string name="connections">Connections</string>
     <string name="group_affiliation">Group Affiliation</string>
     <string name="relatives">Relatives</string>
 </resources>

@@ -38,14 +38,13 @@ class DetailFragment : Fragment() {
 
     private fun populateView() {
         var statusFavorite = false
-        with(args.heroEntity) {
+        args.heroEntity.let {
             binding?.apply {
-                val adapter =
-                    ViewPagerDetailHeroAdapter(requireFragmentManager(), requireContext(), id)
+                val adapter = ViewPagerDetailHeroAdapter(requireFragmentManager(), requireContext(), it.id)
                 viewPager.adapter = adapter
                 tabs.setupWithViewPager(binding?.viewPager)
 
-                viewModel.getSuperheroById(id).observe(viewLifecycleOwner, { hero ->
+                viewModel.getSuperheroById(it.id).observe(viewLifecycleOwner, { hero ->
                     statusFavorite = hero.isFavorite
                     fabState(statusFavorite)
 

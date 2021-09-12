@@ -1,4 +1,4 @@
-package com.onedev.dicoding.superheroapp.favorite
+package com.onedev.dicoding.superheroapp
 
 import org.junit.Test
 

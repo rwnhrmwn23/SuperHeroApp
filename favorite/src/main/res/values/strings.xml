@@ -2,5 +2,4 @@
 <resources>
     <string name="data_not_found">Oops… data not found</string>
     <string name="image_error">Image Error</string>
-    <string name="hero_image">Hero Image</string>
 </resources>
