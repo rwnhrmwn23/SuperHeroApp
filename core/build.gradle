@@ -17,12 +17,19 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+        buildConfigField "String", "DATABASE_NAME", '"SuperHero.db"'
+        buildConfigField "String", "DATABASE_PASSWORD", '"SuperHeroApp_Made_Submission"'
+        buildConfigField "String", "HOSTNAME", '"www.superheroapi.com"'
         buildConfigField "String", "ACCESS_TOKEN", '"6092254417514960"'
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -53,5 +60,9 @@ dependencies {
     // Coroutines Flow
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1'
+
+    // Cipher
+    implementation "net.zetetic:android-database-sqlcipher:4.4.0"
+    implementation "androidx.sqlite:sqlite-ktx:2.1.0"
 
 }
