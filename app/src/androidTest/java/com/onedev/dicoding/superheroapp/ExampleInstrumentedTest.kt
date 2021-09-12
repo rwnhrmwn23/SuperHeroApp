@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.onedev.dicoding.superheroapp.favorite", appContext.packageName)
+        assertEquals("com.onedev.dicoding.superheroapp.app", appContext.packageName)
     }
 }
