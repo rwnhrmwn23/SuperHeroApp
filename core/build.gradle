@@ -1,14 +1,14 @@
 plugins {
     id 'com.android.library'
-    id 'kotlin-kapt'
     id 'kotlin-android'
+    id 'kotlin-kapt'
     id 'kotlin-parcelize'
 }
 
 apply from: '../shared_dependencies.gradle'
 
 android {
-    compileSdk 30
+    compileSdk 34
 
     defaultConfig {
         minSdk 21
@@ -20,7 +20,7 @@ android {
         buildConfigField "String", "DATABASE_NAME", '"SuperHero.db"'
         buildConfigField "String", "DATABASE_PASSWORD", '"SuperHeroApp_Made_Submission"'
         buildConfigField "String", "HOSTNAME", '"www.superheroapi.com"'
-        buildConfigField "String", "ACCESS_TOKEN", '"6092254417514960"'
+        buildConfigField "String", "ACCESS_TOKEN", '"b83bc0b2985c7d69b843e426769b3675"'
     }
 
     buildTypes {
@@ -48,9 +48,9 @@ android {
 dependencies {
 
     // Room
-    implementation "androidx.room:room-ktx:2.3.0"
-    implementation "androidx.room:room-runtime:2.3.0"
-    kapt "androidx.room:room-compiler:2.3.0"
+    implementation "androidx.room:room-ktx:2.6.1"
+    implementation "androidx.room:room-runtime:2.6.1"
+    kapt "androidx.room:room-compiler:2.6.1"
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -58,11 +58,11 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
 
     // Coroutines Flow
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
 
     // Cipher
-    implementation "net.zetetic:android-database-sqlcipher:4.4.0"
-    implementation "androidx.sqlite:sqlite-ktx:2.1.0"
+    implementation "net.zetetic:android-database-sqlcipher:4.4.3"
+    implementation "androidx.sqlite:sqlite-ktx:2.4.0"
 
 }
