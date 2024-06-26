@@ -37,7 +37,7 @@ SuperHeroApp is an Android application that allows users to search for superhero
 | **Retrofit for Networking**     | Performs reliable API network requests using [Retrofit](https://square.github.io/retrofit/). |
 | **Memory Leak Prevention**      | Implements best practices and tools like [LeakCanary](https://square.github.io/leakcanary/) to detect and fix memory leaks. |
 | **Code Obfuscation**            | Protects the app from reverse engineering with [ProGuard](https://www.guardsquare.com/en/products/proguard) and [R8](https://developer.android.com/studio/build/shrink-code). |
-| **SSL Pinning**                 | Ensures secure network communications by enforcing SSL certificates ([SSL Pinning](https://square.github.io/okhttp/features/security/)). |
+| **SSL Pinning**                 | Ensures secure network communications by enforcing SSL certificates ([SSL Pinning](https://square.github.io/okhttp/features/https/#certificate-pinning-kt-java)). |
 | **Database Encryption**         | Secures sensitive data with [SQLCipher for Android](https://www.zetetic.net/sqlcipher/sqlcipher-for-android/), encrypting the local database. |
 
 ## Thanks to
